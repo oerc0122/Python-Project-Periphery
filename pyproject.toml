@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "polysolve"
 authors = [{name = "", email = ""}]
 requires-python = ">= 3.8"
-readme = "README.rst"
+readme = "README.md"
 description = ""
 license = {text = "BSD-3-Clause"}
 

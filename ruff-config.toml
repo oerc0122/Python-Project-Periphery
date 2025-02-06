@@ -1,0 +1,71 @@
+[tool.ruff]
+line-length = 100
+indent-width = 4
+target-version = "py38"
+
+# Exclude a variety of commonly ignored directories.
+extend-exclude = [
+    ".#*",
+    "__pycache__",
+    "test"
+]
+
+[tool.ruff.lint]
+select = [
+    "PL", # Pylint errors
+    "E",   # Pycodestyle
+    "W",   # Pycodestyle warnings
+    "F",   # Pyflakes
+    "B",   # Flake8 bugbear
+    "SIM", # Flake8 Simplify
+    "A",   # Flake8 builtins
+    "COM", # Flake8 commas
+    "ISC", # Flake8 implicit string concat
+    "RSE", # Flake8 raise
+    "FA",  # Flake8 future
+    "FBT", # Flake8 boolean trap
+    "C4",  # Flake8 comprehensions
+    "Q",   # Flake8 Quotes
+    "RET", # Flake8 return
+    "ARG", # Flake8 unused args
+    "PTH", # Flake8 use pathlib
+    "I",   # Isort
+    "RUF", # Ruff specific
+    "FURB",# Refurb
+    "PERF",# Perflint
+    "D",   # Pydocstyle
+    "UP",  # Pyupgrade
+]
+ignore = [
+    "PLR0913",  # Too many arguments
+    "PLR0912",  # Too many branches
+    "PLR0915",  # Too many statements
+    "PLW2901",  # For loop variable overwritten
+    "PLR2004",  # Magic constant value
+    "D105",     # Magic method doc
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.isort]
+profile = "black"
+
+[tool.numpydoc_validation]
+checks = [
+    "all",   # report on all checks, except the below
+    "EX01",
+    "SA01",
+    "ES01",
+]
+# remember to use single quotes for regex in TOML
+exclude = [  # don't report on objects that match any of these regex
+    '\.undocumented_method$',
+    '\.__[^.]*__$',
+]
+override_SS05 = [  # override SS05 to allow docstrings starting with these words
+    '^Process ',
+    '^Assess ',
+    '^Access ',
+    '^Class ',
+]
