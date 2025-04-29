@@ -170,7 +170,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
         \item{}This is a basic introduction to give you the tools get started and the language to ask questions. 
         \begin{itemize}
             \item{}Sadly, it will not give you domain expertise (yet).
-            \footnote{For those interested in developing these skills further, SCD offers online ``software carpentry'' courses, or talk to the ISIS Scientific Softare Group about a short-term embedding.}
+            %\footnote{For those interested in developing these skills further, SCD offers online ``software carpentry'' courses, or talk to the ISIS Scientific Softare Group about a short-term embedding.}
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -190,18 +190,30 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Before we start}
-    Resources for this talk are available at: \\
-    
-    {\small \url{https://github.com/oerc0122/Python-Project-Periphery}}
-\end{frame}
-
 \begin{frame}{Glossary}
     \begin{itemize}
         \item{}\filet{Files}
         \item{}\foldt{Folders}
         \item{}\cmd{Commands}
         \item{}\kw{Keywords}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Before we start}
+    Resources for this talk are available at: \\
+    
+    {\small \url{https://github.com/oerc0122/Python-Project-Periphery}}
+\end{frame}
+
+\begin{frame}{Before we start}
+    \begin{itemize}
+        \item{}We need to make GitHub know it's us when we talk.
+        \item{}Need to generate an ssh key.
+        \item{}On linux/Gitbash run \cmd{ssh-keygen}
+        \item{}You do not need to add a passphrase for this.
+        \item{}On GitHub, go to your avatar (top-right)
+        \item{}Settings $\rightarrow$ SSH and GPG keys $\rightarrow$ New SSH key
+        \item{}Paste contents of \filet{~/.ssh/id.rsa} into box.
     \end{itemize}
 \end{frame}
 
@@ -971,7 +983,7 @@ intersphinx_mapping = {'python': ('https://docs.python.org/3/', None),
             \begin{lstlisting}[basicstyle=\scriptsize]
 [project.optional-dependencies]
 docs = ["sphinx",
-        "sphinx-rtd-theme", 
+        "sphinx_rtd_theme", 
         "sphinx_autodoc_typehints"]
             \end{lstlisting}
         \end{block}
