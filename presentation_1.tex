@@ -76,6 +76,7 @@
 
 \usepackage{ulem}
 \usepackage{tikz}
+\usepackage{amssymb}
 \usetikzlibrary{mindmap}
 \usepackage{listings}
 \lstset{
@@ -118,7 +119,7 @@
 \institute[STFC] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
 Scientific Computing Department, STFC \\ \ \\% Your institution for the title page
-\includegraphics[width=0.4\textwidth]{STFCLogo.png}
+\includegraphics[width=0.4\textwidth]{Images/STFCLogo.png}
 }
 \date{\today}
 
@@ -220,7 +221,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \section{The code}
 
 \begin{frame}{Introducing florp}
-    \lstinputlisting[basicstyle=\scriptsize]{florp.py}
+    \lstinputlisting[basicstyle=\tiny]{Resources/florp.py}
 \end{frame}
 
 \begin{frame}{Florpulate it}
@@ -245,9 +246,19 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \begin{frame}{Sensible names for sensible projects}
     \begin{itemize}[<+->]
         \item{}Before anything else need to give the project usable names!
-        \item{}Let's choose \filet{polysolve.py} and rename functions accordingly.
+        \item{}Let's choose \filet{solver.py} and rename functions accordingly.
         \item{}Next thing is to get it saved and tracked.
     \end{itemize}
+\end{frame}
+
+\begin{frame}{Sensible names}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}Rename \filet{florp.py} to \filet{solver.py}
+            \item{}Rename \kw{florp} to \kw{quadratic}
+            \item{}Rename \kw{florp2} to \kw{cubic}
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \section{GitHub}
@@ -265,32 +276,50 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{Using GitHub}
-    \begin{itemize}[<+->]
-        \item{}Create a new repository with the new (sensible) name!
-        \item{}Add license, readme and set to ignore ``python'' extras.
+    \begin{alertblock}{Your turn}
         \begin{itemize}
-            \item{}The license choice is probably a topic for another talk.
-            \item{}The readme is displayed at the bottom of your GitHub page.
-            \item{}The ignore skips temporary files when using ``\cmd{git add}''.
+            \item{}Create a new repository with a new (sensible) name (PolysolveLib)!
+            \item{}Add license, readme and set to ignore ``python'' extras.
+            \begin{itemize}
+                \item{}The license choice is probably a topic for another talk.
+                \item{}The readme is displayed at the bottom of your GitHub page.
+                \item{}The ignore skips temporary files when using ``\cmd{git add}''.
+            \end{itemize}
+            \item{}\cmd{git clone} the new repo and move \filet{solver.py} into it.
+            \item{}\cmd{git add solver.py}
+            \item{}\cmd{git commit -m 'Add initial code'}
+            \item{}\cmd{git push --set-upstream origin}
         \end{itemize}
-        \item{}\cmd{git clone} the new repo and move \filet{polysolve.py} into it.
-        \item{}\cmd{git add polysolve.py}
-        \item{}\cmd{git commit -m 'Add initial code'}
-        \item{}\cmd{git push --set-upstream origin}
-    \end{itemize}
+    \end{alertblock}
+\end{frame}
 
+\begin{frame}{Example}
     \only<1> {
-        \vspace{-3em}
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{new-repo.jpg}
-        \end{center}
+            \hspace*{-2.75em}\includegraphics[width=1.2\textwidth]{Images/new-repo.jpg}
     }
-    \only<2-5> {
-        \vspace{-3em}
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{creatingrepo.jpg}
-        \end{center}
+    \only<2> {
+            \begin{center}
+                \includegraphics[trim=20cm 0 20cm 0, clip, height=0.8\textheight]{Images/creatingrepo.jpg}
+            \end{center}
     }
+\end{frame}
+
+\begin{frame}{Using GitHub}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}Create a new repository with a new (sensible) name (PolysolveLib)!
+            \item{}Add license, readme and set to ignore ``python'' extras.
+            \begin{itemize}
+                \item{}The license choice is probably a topic for another talk.
+                \item{}The readme is displayed at the bottom of your GitHub page.
+                \item{}The ignore skips temporary files when using ``\cmd{git add}''.
+            \end{itemize}
+            \item{}\cmd{git clone} the new repo and move \filet{solver.py} into it.
+            \item{}\cmd{git add solver.py}
+            \item{}\cmd{git commit -m 'Add initial code'}
+            \item{}\cmd{git push --set-upstream origin}
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}{Using GitHub}
@@ -307,7 +336,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
     \begin{itemize}[<+->]
         \item{}To start a project, we need to define what the project is.
         \item{}The first step is to change the structure to that of a project.
-        \item{}Make a new folder ``\foldt{polysolve}'' and \cmd{git mv}  ``\filet{polysolve.py}'' into it.  
+        \item{}Make a new folder ``\foldt{polysolve}'' and \cmd{git mv}  ``\filet{solver.py}'' into it.  
     \end{itemize}
 
     \begin{block}<+>{Layout}
@@ -318,30 +347,50 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{Making a package}
-    \begin{itemize}[<+->]
-        \item{}Now we add a new file called \initf{} in \foldt{polysolve}.
-        \item{}The \initf{} is a magic file.
-        \item{}In Python it makes a folder accessible for \kw{import}.
-    \end{itemize}
-
-    \begin{block}<+>{Try it out!}
-        \lstinputlisting{import.py}
+    \begin{alertblock}{Try it out!}
+        \begin{itemize}        
+            \item{}Make a new folder ``\foldt{polysolve}''
+            \item{}\cmd{git mv}  ``\filet{solver.py}'' into it.  
+            \item{}Create an empty file called \initf{} in \foldt{polysolve}
+            \item{}You need to \cmd{pip install cowsay} to get this to run.
+            \item{}From \foldt{PolysolveLib} run \cmd{python} and run the following code \\ (\textbf{NOTE:} Do not type the \texttt{>>>})
+        \end{itemize}
+    
+        \lstinputlisting{Resources/import.py}
         
-        \textbf{NOTE:} This is only accessible from our project folder, not the system, it's not installed yet.
-    \end{block}
+        \textbf{NOTE:} This is only accessible from our project folder (\foldt{PolysolveLib}), not the system, it's not installed yet.
+    \end{alertblock}    
 \end{frame}
 
 \begin{frame}{Making a package}
     \begin{itemize}[<+->]
+        \item{}This file, \initf{}, is a magic file.
+        \item{}In Python it makes a folder accessible for \kw{import}.
         \item{}All files in the folder with the \initf{} are accessible.
         \item{}Subfolders can be nested, each one needs an \initf{}.
         \item{}Code in an \initf{} is run \textbf{when the module is imported}.
+        \item{}The is attached to the name of the module.
         \item{}This can be used for setup or our package's metadata.
     \end{itemize}
+\end{frame}
 
-    \begin{alertblock}<+>{Add some code to \_\_init\_\_.py}
-    \lstinputlisting{__init__.py}
-    \end{alertblock}
+\begin{frame}[fragile]{I've never metadata who did}
+    \begin{alertblock}{Your turn}
+    \begin{itemize}
+        \item{}Add the following code to \initf{}
+    \end{itemize}
+    \lstinputlisting{Resources/__init__.py}
+    \begin{itemize}
+        \item{}From \foldt{PolysolveLib} run \cmd{python} and run the following code:
+
+        \begin{lstlisting}
+>>> import polysolve
+>>> polysolve.__author__
+>>> polysolve.__version__
+>>> help(polysolve)
+        \end{lstlisting}
+    \end{itemize}
+    \end{alertblock}    
 \end{frame}
 
 \subsection{pyproject.toml}
@@ -367,7 +416,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 
 
 \begin{frame}{The pyproject.toml}
-    \lstinputlisting[basicstyle=\tiny]{pyproject.toml}
+    \lstinputlisting[basicstyle=\tiny]{Resources/pyproject.toml}
 
     Let's look at these individually.
     \begin{block}{Note}
@@ -376,7 +425,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{build-system}
-    \lstinputlisting[linerange={1-3}]{pyproject.toml}
+    \lstinputlisting[linerange={1-3}]{Resources/pyproject.toml}
     \begin{itemize}[<+->]
         \item{}These are the Python tools \cmd{pip} will use to build your project.
         \item{}You may choose something else (info on PyPA\footnote{\tiny{\url{https://packaging.python.org/en/latest/tutorials/packaging-projects/}}}), but we'll just stick with \cmd{setuptools}.
@@ -384,7 +433,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{project}
-    \lstinputlisting[linerange={5-15}]{pyproject.toml}
+    \lstinputlisting[linerange={5-15}]{Resources/pyproject.toml}
     \begin{itemize}
         \item{}These define the properties which describe your project:
         \only<+>{\item{}\kw{name} -- The project's installed name.}
@@ -403,14 +452,14 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{Webpages}
-    \lstinputlisting[linerange={18-20}]{pyproject.toml}
+    \lstinputlisting[linerange={18-20}]{Resources/pyproject.toml}
     \begin{itemize}[<+->]
         \item{}PyPI will add these links in a sidebar if you upload your project.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Dynamic}
-    \lstinputlisting[linerange={5,16,21-23}]{pyproject.toml}
+    \lstinputlisting[linerange={5,16,21-23}]{Resources/pyproject.toml}
     \begin{itemize}[<+->]
         \item{}You may have spotted \kw{dynamic} at the end of the \kw{[project]} block.
         \item{}\kw{dynamic} is a special keyword which tells \cmd{pip} the variable will come from somewhere else.
@@ -423,26 +472,37 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{Connect the dots}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}Copy \filet{pyproject.toml} to your project root directory.
+            \item{}We can fill in the gaps in our \filet{pyproject.toml} (\textbf{NOTE:} You must add non-blank authors)
+            \item{}We also need to tell it that we have some dependencies (\kw{cowsay}). Change the relevant line to \kw{dependencies = ["cowsay"]}
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Connect the dots}
     \begin{itemize}[<+->]
-        \item{}Copy \filet{pyproject.toml} to your project root directory.
-        \item{}We can fill in the gaps in our \filet{pyproject.toml}
-        \item{}\textbf{Note:} you need to have \kw{dependencies = ["numpy"]}
         \item{}Then we can see some magic happen.
         \item{}\cmd{pip} checks we have all the requirements, installs the dependencies, then our project.
         \item{}\textbf{NOTE:} It's now installed system-wide.
     \end{itemize}
-    \only<2-4>{
-        \begin{block}{Try it out!}
+    \only<2-3>{
+        \begin{alertblock}{Try it out!}
+            \cmd{pip uninstall cowsay} -- Just proving a point
+        
             \cmd{pip install .}
+
+            \cmd{cd ~}
             
             \cmd{python}
             
-            \cmd{>>> from polysolve import polysolve}
+            \cmd{>>> from polysolve import solver}
             
-            \cmd{>>> polysolve.quadratic(3, 1, 2)}
-        \end{block}
+            \cmd{>>> solver.quadratic(3, 1, 2)}
+        \end{alertblock}
     }
-    \begin{block}<5>{Developing}
+    \begin{block}<4>{Developing}
         While developing you will want:
         
         \cmd{pip install -e .}
@@ -452,17 +512,27 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
 \end{frame}
 
 \begin{frame}{Get it gitted}
-    \begin{itemize}[<+->]
-        \item{}Now add the \filet{pyproject.toml} to \cmd{git}.
-        \item{}Push it up to GitHub.
-    \end{itemize}
-    \only<3->{
+    \begin{alertblock}{To git}
+        \begin{itemize}
+            \item{}Now \cmd{add} the files to \cmd{git}.
+            \item{}\cmd{git commit}
+            \item{}\cmd{push} it up to GitHub.
+        \end{itemize}
+    \end{alertblock}
+    
+    \only<2->{
         \begin{block}{More magic!}
             {\scriptsize \cmd{pip install git+https://github.com/<owner_name>/polysolve.git}
             
             \textbf{NOTE:} PyPI is ``easier'', but requires accounts. This is convenient for small stuff.}
         \end{block}
     }
+\end{frame}
+
+\begin{frame}{Structure}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{Images/folderstruct1.png}
+    \end{center}
 \end{frame}
 
 \begin{frame}{Great, we have a project}
@@ -487,15 +557,18 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
     \begin{itemize}[<+->]
         \item{}Let's start with something simple.
         \item{}Our \filet{README.md} basically says the project name.
-        \item{}We know how to install it now, so let's add that.
-        \item{}Push it up to GitHub and see the glory of your hard work.
     \end{itemize}
 
-    \only<3->{
-        \begin{block}{More magic!}
-            {\scriptsize \cmd{pip install git+https://github.com/<owner_name>/polysolve.git}}
-        \end{block}
-    }   
+    \begin{alertblock}<+>{Our first docs}
+        \begin{itemize}
+            \item{}We know how to install it now, so let's add that.
+
+                {\scriptsize \cmd{pip install git+https://github.com/<owner_name>/polysolve.git}}
+
+            \item{}Push it up to GitHub and see the glory of your hard work.
+        \end{itemize}
+    \end{alertblock}
+
 \end{frame}
 
 \subsection{Type-hints}
@@ -518,14 +591,15 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
     \begin{onlyenv}<3>
         \begin{lstlisting}[basicstyle=\scriptsize]
 def quadratic(
-        a: float, 
-        b: float, 
-        c: float,
+    a: float, 
+    b: float, 
+    c: float
 ) -> tuple[float, float]:
-    det = b**2 - (4*a*c)
+    det = b**2 - (4 * a * c)
 
-    return ((-b + np.sqrt(det)) / (2*a),
-            (-b - np.sqrt(det)) / (2*a))
+    out = ((-b + sqrt(det)) / (2 * a), (-b - sqrt(det)) / (2 * a))
+
+    return out
         \end{lstlisting}
     \end{onlyenv}
 
@@ -534,14 +608,15 @@ def quadratic(
 from __future__ import annotations
         
 def quadratic(
-        a: float, 
-        b: float, 
-        c: float,
+    a: float, 
+    b: float, 
+    c: float
 ) -> tuple[float, float]:
-    det = b**2 - (4*a*c)
+    det = b**2 - (4 * a * c)
 
-    return ((-b + np.sqrt(det)) / (2*a),
-            (-b - np.sqrt(det)) / (2*a))
+    out = ((-b + sqrt(det)) / (2 * a), (-b - sqrt(det)) / (2 * a))
+
+    return out
         \end{lstlisting}
 
         \begin{block}{Note}
@@ -560,14 +635,15 @@ def quadratic(
 
     \begin{lstlisting}[basicstyle=\scriptsize]
 def quadratic(
-        a: float, 
-        b: float, 
-        c: float,
+    a: float, 
+    b: float, 
+    c: float
 ) -> tuple[float, float]:
-    det = b**2 - (4*a*c)
+    det = b**2 - (4 * a * c)
 
-    return ((-b + np.sqrt(det)) / (2*a),
-            (-b - np.sqrt(det)) / (2*a))
+    out = ((-b + sqrt(det)) / (2 * a), (-b - sqrt(det)) / (2 * a))
+
+    return out
     \end{lstlisting}
 
 \end{frame}
@@ -578,7 +654,7 @@ def quadratic(
     \begin{itemize}[<+->]
         \item{}So we know what we're feeding the black box.
         \item{}Wouldn't it be nice if the box told us what it did (or is trying to do)?
-        \item{}Don't go rushing off to write in the filet{README.md} again!
+        \item{}Don't go rushing off to write in the \filet{README.md} again!
     \end{itemize}
 \end{frame}
 
@@ -591,7 +667,7 @@ def quadratic(
     \end{itemize}
 
     \begin{onlyenv}<2->
-        \lstinputlisting[basicstyle=\scriptsize,linerange={3-5,51}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={6-7,53}]{Resources/quadexm.py}
     \end{onlyenv}
 \end{frame}
 
@@ -602,39 +678,39 @@ def quadratic(
 
     % Basic
     \begin{onlyenv}<1>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={3-5,51}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={6-7,53}]{Resources/quadexm.py}
     \end{onlyenv}
     % Extended
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={3-7,51}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={6-9,53}]{Resources/quadexm.py}
     \end{onlyenv}
     % Params
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={3-17,51}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={6-19,53}]{Resources/quadexm.py}
     \end{onlyenv}
     % Returns
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={3-21,51}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={6-24,53}]{Resources/quadexm.py}
     \end{onlyenv}
     % Examples
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={36-41}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={38-44}]{Resources/quadexm.py}
     \end{onlyenv}
     % Raises
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={22-26}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={25-28}]{Resources/quadexm.py}
     \end{onlyenv}
     % Notes
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={27-34}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={30-36}]{Resources/quadexm.py}
     \end{onlyenv}
     % See Also
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={43-46}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={45-48}]{Resources/quadexm.py}
     \end{onlyenv}
     % References
     \begin{onlyenv}<+>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={47-50}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={49-52}]{Resources/quadexm.py}
     \end{onlyenv}
 \end{frame}
 
@@ -650,7 +726,7 @@ def quadratic(
     \kw{numpydoc} \\
     {\footnotesize \url{numpydoc.readthedocs.io/en/latest/format.html}}
 
-    \lstinputlisting[basicstyle=\tiny,linerange={3-21,51}]{quadexm.py}
+    \lstinputlisting[basicstyle=\tiny,linerange={3-21,51}]{Resources/quadexm.py}
 
 \end{frame}
     
@@ -708,7 +784,7 @@ def quadratic(a: float, b: float, c: float) -> tuple[float, float]:
     \end{itemize}
 
     \begin{onlyenv}<2->
-        \lstinputlisting[basicstyle=\scriptsize,linerange={36-41}]{quadexm.py}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={38-44}]{Resources/quadexm.py}
     \end{onlyenv}
 \end{frame}
 
@@ -719,27 +795,34 @@ def quadratic(a: float, b: float, c: float) -> tuple[float, float]:
         \item{}\url{https://docs.python.org/3/library/doctest.html}
     \end{itemize}
 
-    \lstinputlisting[basicstyle=\scriptsize,linerange={36-41}]{quadexm.py}
+    \lstinputlisting[basicstyle=\scriptsize,linerange={38-44}]{Resources/quadexm.py}
+\end{frame}
 
-    \begin{onlyenv}<+>
-        \begin{block}{Try it out!}
-            \begin{lstlisting}
+\begin{frame}[fragile]{Trying tests}
+    \begin{alertblock}{Try it out!}
+        \begin{itemize}
+            \item{}Add a sensible amount of documentation to \filet{solver.py}. (Short summary, parameters, returns, examples will do. You can steal bits of \filet{quadexm.py}).
+            \item{}Try running python doctests on your source
+        \end{itemize}
+
+        \begin{lstlisting}
 python -m doctest polysolve.py
-            \end{lstlisting}
-        \end{block}
-    \end{onlyenv}
+        \end{lstlisting}
+
+        \begin{itemize}
+            \item{}We can make it so when we run our code we run the tests. Add the following to the end of \filet{solver.py}.
+        \end{itemize}
         
-    \begin{onlyenv}<+>
-        \begin{block}{Try it out!}
-            \begin{lstlisting}
+        \begin{lstlisting}
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+        \end{lstlisting}
 
-python polysolve.py
-            \end{lstlisting}
-        \end{block}
-    \end{onlyenv}
+        \begin{itemize}
+            \item{}Run \cmd{python polysolve.py}.
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]{More magic}
@@ -790,21 +873,38 @@ array([1, 2, 3])
 
 \subsection{Sphinx}
 
-\begin{frame}[fragile]{Finally getting to docs}
+\begin{frame}{Finally getting to docs}
     \begin{itemize}[<+->]
         \item{}Now after so long, it's time to finally write some docs!
         \item{}{\small (or let the computer write some for us...)}
     \end{itemize}
-    
-    \begin{block}<+>{Getting started! (Linux)}
-        \begin{lstlisting}[language=sh]
-pip install sphinx sphinx_rtd_theme
-mkdir docs; cd docs
-sphinx-quickstart
-make html
-chromium build/html/index.html
-        \end{lstlisting}
-    \end{block}
+\end{frame}
+
+\begin{frame}{Getting started}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}\cmd{pip install sphinx sphinx_rtd_theme}
+            \item{}Make a directory in \foldt{PolysolveLib} called \foldt{docs}
+            \item{}From the \foldt{docs} folder run \cmd{sphinx-quickstart} (answer \cmd{y} to the first question)
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Structure}
+    \begin{center}
+        \includegraphics[width=\textwidth]{Images/folderstruct2.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Build the docs}
+    \begin{alertblock}{Build the docs}
+        \begin{itemize}
+            \item{}From the \foldt{docs} folder run the appropriate \filet{make} with \kw{html} as the argument.
+            \item{}This should build some docs.
+            \item{}Open \filet{build/html/index.html} in your browser.
+            \item{}Bask in the glory of your docs.
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}{Keys to the docs}
@@ -826,13 +926,23 @@ chromium build/html/index.html
         \item{}\cmd{sphinx} is a fully extensible package. We'll be using some of these later.
         \item{}\kw{exclude_patterns} allows us to exclude source files from our sphinx build.
         \item{}We can change the docs theme to render them differently.
-        \item{}Since we installed \kw{sphinx_rtd_theme} we can try that.
     \end{itemize}
 
-    \only<1-2>{\lstinputlisting[basicstyle=\tiny,linerange={1-5}]{conf.py}}
-    \only<3>{\lstinputlisting[basicstyle=\tiny,linerange={6-14}]{conf.py}}
-    \only<4-5>{\lstinputlisting[basicstyle=\tiny,linerange={16-22}]{conf.py}}
-    \only<6-7>{\lstinputlisting[basicstyle=\tiny,linerange={24-28}]{conf.py}}
+    \only<1-2>{\lstinputlisting[basicstyle=\tiny,linerange={1-5}]{Resources/conf.py}}
+    \only<3>{\lstinputlisting[basicstyle=\tiny,linerange={6-14}]{Resources/conf.py}}
+    \only<4-5>{\lstinputlisting[basicstyle=\tiny,linerange={16-22}]{Resources/conf.py}}
+    \only<6-7>{\lstinputlisting[basicstyle=\tiny,linerange={24-28}]{Resources/conf.py}}
+\end{frame}
+
+\begin{frame}{Fill in the config}
+    \begin{alertblock}{Configure the docs}
+        \begin{itemize}
+            \item{}Import \kw{polysolve} and try setting the version and author from the metadata in the module. (\textbf{Note:} This will only work if \cmd{sphinx} can see your module, i.e. it's installed.)
+            \item{}Since we installed \kw{sphinx_rtd_theme} we can try that. Set the \kw{html_theme} to \kw{sphinx_rtd_theme}
+            \item{}\cmd{make} the docs and see what's changed.
+        \end{itemize}
+
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}{index.rst}
@@ -841,34 +951,21 @@ chromium build/html/index.html
         \item{}Text ``marked-up'' with formatting (like \LaTeX{} or HTML).
     \end{itemize}
 
-    \lstinputlisting[basicstyle=\tiny,linerange={-16}]{index.rst}
+    \lstinputlisting[basicstyle=\tiny,linerange={-16}]{Resources/index.rst}
 \end{frame}
 
 \begin{frame}[fragile]{Writing our docs}
-    \begin{itemize}
-        \item<1->{}Now we need some files to actually to actually fill with docs!
-        \item<2->{}Create a file called \filet{usage.rst}.
-        \item<3->{}Write some documentation.
-        \item<4->{}Add it to our ``table of contents tree'' (\kw{toctree}).
-        \item<6->{}Build our docs!
-    \end{itemize}
-
-    \begin{onlyenv}<3>
-        \begin{lstlisting}
-Usage
-=====
-
-Here's how to use polysolve!
-        \end{lstlisting}
-    \end{onlyenv}
-    
-    \only<4>{\lstinputlisting[linerange={14-16}]{index.rst}}
-    \only<5>{\lstinputlisting[linerange={14-18}]{index.rst}}
-    \begin{onlyenv}<6>
-        \begin{block}{Make it so!}
-            \cmd{make html}
-        \end{block}
-    \end{onlyenv}
+    \begin{alertblock}{Get some docs}
+        \begin{itemize}
+            \item{}Now we need some files to actually to actually fill with docs!
+            \item{}In \foldt{docs/source}, create a file called \filet{usage.rst}.
+            \item{}Write some documentation.
+            \item{}In \filet{docs/source/index.rst}, add it to our ``table of contents tree'' (\kw{toctree}).
+            \item{}\cmd{make html}
+        \end{itemize}
+\lstinputlisting[linerange={14-18}]{Resources/index.rst}
+            
+    \end{alertblock}
     
 \end{frame}
 
@@ -907,19 +1004,20 @@ Here's how to use polysolve!
 \end{frame}
 
 \begin{frame}{Docstring magic}
-    \begin{itemize}[<+->]
+    \begin{itemize}
         \item{}We need to create all the infrastructure to extract our info.
         \item{}Just kidding, there's a tool for that!
-        \item{}Just add it to the \cmd{toctree} and we're set.
-        \item{}{\scriptsize after we \cmd{make html}}
     \end{itemize}
 
-    \only<2>{
-        \begin{block}{It's magic!}
-            \cmd{sphinx-apidoc -o docs/source/api polysolve}
-        \end{block}
-    }
-    \only<3>{\lstinputlisting[linerange={14-19}]{index.rst}}
+    \begin{alertblock}{It's magic!}
+        \begin{itemize}
+            \item{}Add \kw{sphinx.ext.autodoc}, \kw{sphinx.ext.napoleon}, and \kw{sphinx.ext.autosummary} to the \kw{extensions} in \filet{conf.py}
+            \item{}From the \foldt{PolysolveLib} folder run \cmd{sphinx-apidoc -o docs/source/api polysolve}
+            \item{}Add \kw{api/modules} to the \kw{toctree} in \filet{docs/source/index.rst}.
+            \item{}Run \cmd{make html}
+        \end{itemize}
+           
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile]{Type-hints}
@@ -929,73 +1027,59 @@ Here's how to use polysolve!
         \item{}Alas, it's surely impossible...
     \end{itemize}
 
-    \begin{onlyenv}<+>
-        \begin{block}{Da-da-da-daaaa}
-            \cmd{pip install sphinx-autodoc-typehints}
-        \end{block}
-    \end{onlyenv}
+\end{frame}
 
-    \begin{onlyenv}<+>
-        \begin{block}{Da-da-da-daaaa}
-            \begin{lstlisting}
-extensions = [...,
-              "sphinx_autodoc_typehints",
-              ]
-            \end{lstlisting}
-        \end{block}
-    \end{onlyenv}
-
+\begin{frame}{Try it yourself}
+    \begin{alertblock}{Add the type-hints}
+        \begin{itemize}
+            \item{}Run \cmd{pip install sphinx-autodoc-typehints}
+            \item{}Add \kw{"sphinx_autodoc_typehints"} to the list of \kw{extensions} in \filet{docs/source/conf.py}
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \subsection{intersphinx}
 
-\begin{frame}[fragile]{But what is a float really?}
+\begin{frame}{But what is a float really?}
     \begin{itemize}[<+->]
         \item{}But now I'm unhappy because when I click \kw{float} it doesn't take me to the documentation of \kw{float}.
         \item{}{\scriptsize Some people, honestly.}
         \item{}Introducing ``\cmd{intersphinx}''.
         \item{}Links your documentation against other \cmd{sphinx} documentation sites automatically.
     \end{itemize}
+\end{frame}
 
-    \begin{onlyenv}<3->
-        \begin{block}{Ta-da}
-            \begin{lstlisting}[basicstyle=\tiny]
-extensions = [...,
-              "sphinx.ext.intersphinx",
-              ]
-              ...
-intersphinx_mapping = {'python': ('https://docs.python.org/3/', None),
-                       'numpy': ('https://docs.scipy.org/doc/numpy/', None),
-                       ...}
-            \end{lstlisting}
-        \end{block}
-    \end{onlyenv}    
+\begin{frame}[fragile]{Intersphinx}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}Add \kw{"sphinx.ext.intersphinx"} to \filet{conf.py}.
+            \item{}Add an \kw{intersphinx_mapping} to \filet{conf.py} (see: below)
+            \item{}This mapping tells \cmd{sphinx} where to search for external documentation.
+            \item{}\cmd{make} the docs and see the new highlighted links.
+        \end{itemize}
+        \begin{lstlisting}[basicstyle=\tiny]
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3/', None),
+}
+        \end{lstlisting}
+    \end{alertblock}    
 \end{frame}
 
 \begin{frame}[fragile]{Adding it to the project}
-    \begin{itemize}[<+->]
-        \item{}Now that we know what we need, we can add these to our \filet{pyproject.toml}.
-        \item{}Not everyone needs to install them, so let's add them as an optional dependency.
-    \end{itemize}
-
     \begin{onlyenv}<+>
-        \begin{block}{Adding it in}
+        \begin{alertblock}{Add it in}
+            \begin{itemize}
+                \item{}Now that we know what we need, we can add these to our \filet{pyproject.toml}. Not everyone needs to install them, so let's add them as an optional dependency. (See below)
+                \item{}Run \cmd{pip install -e ".[docs]"} from \foldt{PolysolveLib} to install with the \kw{docs} extra.
+            \end{itemize}
             \begin{lstlisting}[basicstyle=\scriptsize]
 [project.optional-dependencies]
 docs = ["sphinx",
         "sphinx_rtd_theme", 
-        "sphinx_autodoc_typehints"]
+        "sphinx-autodoc-typehints"]
             \end{lstlisting}
-        \end{block}
+        \end{alertblock}
     \end{onlyenv}
-
-    \begin{onlyenv}<+>
-        \begin{block}{Adding it in}
-            To install:
-
-            \cmd{pip install -e ".[docs]"}
-        \end{block}
-    \end{onlyenv}    
 \end{frame}
 
 
@@ -1048,51 +1132,39 @@ docs = ["sphinx",
 \end{frame}
 
 \begin{frame}[fragile]{Testing}
-    \begin{itemize}[<+->]
-        \item{}First let's install the \kw{pytest}\footnote{\textbf{NOTE:} Python ships with the \kw{unittest} library, but rather than teaching two methods and confusing things, I'm sticking with one.} library.
-        \item{}Let's create a \foldt{tests} folder.
-        \item{}In that folder, let's create a \filet{test_quadratic.py}.
-        \item{}What type of test is this?
-        \item{}Run it!
-        \item{}But what about our doctests?
-    \end{itemize}
-
-    \only<1>{
-    \begin{block}{Let's get started!}
-        \cmd{pip install pytest}
-    \end{block}    
-    }
-    
-    \begin{onlyenv}<3-4>
+    \begin{alertblock}{Setting up}
+        \begin{itemize}
+            \item{}Install the \kw{pytest}\footnote{\textbf{NOTE:} Python ships with the \kw{unittest} library, but rather than teaching two methods and confusing things, I'm sticking with one.} library.
+            \item{}Create a \foldt{tests} folder.
+            \item{}In that folder, let's create a \filet{test_quadratic.py} with the code below.
+        \end{itemize}
+        
         \begin{lstlisting}[basicstyle=\tiny]
-import pytest
-import numpy as np
-from polysolve.polysolve import quadratic
+import math
+from polysolve.solver import quadratic
 
-def test_quadratic():
+def quad(a, b, c, x):
+    return a * x**2 + b * x + c
+
+def test_roots():
     """Tests that quadratic finds the root for a known problem."""
-    params = [3., 0., -1.]
+    params = (3.0, 0.0, -1.0)
     roots = quadratic(*params)
-    assert all(np.isclose(np.polyval(params, root), 0.) for root in roots)
+
+    assert all(math.isclose(quad(*params, root), 0.0) for root in roots)
         \end{lstlisting}
-    \end{onlyenv}
+        \begin{itemize}
+            \item{}From \foldt{PolysolveLib}, run \cmd{pytest}. But what about our doctests? Try \cmd{pytest --doctest-modules}
+        \end{itemize}
+            
+    \end{alertblock}
 
-    \only<5>{
-    \begin{block}{Try it out!}
-        \cmd{pytest}
-    \end{block}
-    }
-
-    \only<6>{
-    \begin{block}{Try it out!}
-        \cmd{pytest --doctest-modules}
-    \end{block}
-    }
 \end{frame}
 
 \begin{frame}{Testing}
     \begin{itemize}[<+->]
-        \item{}\kw{pytest} picks up files called \filet{test_*}
+        \item{}By default, \cmd{pytest} scans files from where you are.
+        \item{}\cmd{pytest} picks up files starting with \filet{test_}.
         \item{}Runs all functions starting with \kw{test_}.
         \item{}{\scriptsize (and as mentioned with the \cmd{--doctest-modules} flag, runs those too)}
         \item{}Collates them all and runs them together.
@@ -1122,13 +1194,17 @@ def test_quadratic():
 
     \begin{onlyenv}<4>
         \begin{lstlisting}[basicstyle=\scriptsize]
-@pytest.mark.parametrize('params, expected',
-                         [([1., 0., 0.], [0., 0.]),
-                          ([1., 14., 49.], [7., 7.]),
-                          ([3., 2., 1.], [1/3, -1.])])
+@pytest.mark.parametrize(
+    "params, expected",
+    [
+        ([1.0, 0.0, 0.0], [0.0, 0.0]),
+        ([1.0, 14.0, 49.0], [-7.0, -7.0]),
+        ([3.0, 2.0, -1.0], [1 / 3, -1.0]),
+    ],
+)
 def test_quadratic(params, expected):
     """Test quadratic meets expectations."""
-    assert np.isclose(quadratic(*params), expected)
+    assert all(map(cmath.isclose, quadratic(*params), expected))
         \end{lstlisting}
     \end{onlyenv}
 
@@ -1147,12 +1223,38 @@ def test_example(a, b):
     \end{onlyenv}
 \end{frame}
 
+\begin{frame}[fragile]{Testing}
+    \begin{alertblock}{Setting up}
+        \begin{itemize}
+            \item{}Have a go at writing a test with \kw{parametrize}.
+            
+            \textbf{Note:} We now have to import \kw{pytest}.
+            \item{}Remember to run it with \cmd{pytest}.
+        \end{itemize}
+    \end{alertblock}
+
+        \begin{lstlisting}[basicstyle=\scriptsize]
+@pytest.mark.parametrize(
+    "params, expected",
+    [
+        ([1.0, 0.0, 0.0], [0.0, 0.0]),
+        ([1.0, 14.0, 49.0], [-7.0, -7.0]),
+        ([3.0, 2.0, -1.0], [1 / 3, -1.0]),
+    ],
+)
+def test_quadratic(params, expected):
+    """Test quadratic meets expectations."""
+    assert all(map(cmath.isclose, quadratic(*params), expected))
+        \end{lstlisting}
+
+\end{frame}
+
+
 \begin{frame}[fragile]{Testing failures}
     \begin{itemize}[<+->]
         \item{}Now we need to fail spectacularly.
         \item{}Usually, providing a wrong answer is worse than exploding\footnote{HCF - Halt and Catch Fire -- Genuine assembly instruction}.
         \item{}It's good to make sure our failures fail and are helpful.
-        \item{}Does it fail?
     \end{itemize}
 
     \begin{onlyenv}<3->
@@ -1160,11 +1262,31 @@ def test_example(a, b):
 def test_quadratic_fails():
     """Check bad quadratic raises error."""
     with pytest.raises(ValueError, 
-                       match="negative discriminant"):
+                       match="not quadratic"):
         # There are infinite roots on this flat line.
         quadratic(0., 0., 0.)
         \end{lstlisting}
     \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]{Failing}
+    \begin{alertblock}{Trying to fail}
+        \begin{itemize}
+            \item{}Add the following test to \filet{tests/test_quadratic.py}
+        \end{itemize}
+            \begin{lstlisting}[basicstyle=\scriptsize]
+    def test_quadratic_fails():
+        """Check bad quadratic raises error."""
+        with pytest.raises(ValueError, 
+                           match="not quadratic"):
+            # There are infinite roots on this flat line.
+            quadratic(0., 0., 0.)
+            \end{lstlisting}
+        \begin{itemize}
+            \item{}Does it pass? If not can you make it? 
+        \end{itemize}
+    \end{alertblock}
+    
 \end{frame}
 
 \begin{frame}{Testing as design}
@@ -1199,7 +1321,7 @@ def test_quintic():
     \end{onlyenv}
 \end{frame}
 
-\begin{frame}[fragile]{Testing}
+\begin{frame}{Testing}
     \begin{itemize}[<+->]
         \item{}Testing helps you:
         \begin{itemize}
@@ -1210,21 +1332,28 @@ def test_quintic():
         \end{itemize}
         \item{}\textbf{Hint:} Testing is good.
         \item{}Code without tests can be considered worthless.
-        \item{}So let's add it to our \filet{pyproject.toml}
     \end{itemize}
 
-    \begin{onlyenv}<8>
-        \begin{block}{Adding it in}
-            \begin{lstlisting}[basicstyle=\scriptsize]
-[project.optional-dependencies]
-docs = ["sphinx",
-        "sphinx-rtd-theme", 
-        "sphinx_autodoc_typehints"]
-test = ["pytest"]
-            \end{lstlisting}
-        \end{block}
-    \end{onlyenv}
+\end{frame}
 
+\begin{frame}[fragile]{Adding to pyproject}
+    \begin{alertblock}{Adding it in}
+        \begin{itemize}
+            \item{}Add it to your \filet{pyproject.toml}
+            \item{}Install it to check it works.
+            \item{}\cmd{add} all appropriate files and get it on GitHub (\cmd{push}).
+        \end{itemize}
+    
+        \begin{lstlisting}[basicstyle=\scriptsize]
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme", 
+    "sphinx-autodoc-typehints"
+]
+test = ["pytest"]
+        \end{lstlisting}
+    \end{alertblock}
 \end{frame}
 
 \begin{frame}{Testing}
@@ -1256,14 +1385,21 @@ test = ["pytest"]
         \item{}We do this by adding a \filet{yaml} file in the right place.
         \item{}GitHub provides actions where we just need to fill in values.
     \end{itemize}
+\end{frame}
 
-    \only<4>{
-        \begin{block}{Adding it in!}
-            \cmd{mkdir -P .github/workflows}
-    
-            \cmd{cp <pres>/test_florp.yml .github/workflows}
-        \end{block}
-    }
+\begin{frame}{Starting off}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}Create a nested folder in \foldt{PolysolveLib} called \foldt{.github/workflows}
+            \item{}Copy the \filet{test_florp.yml} from the \foldt{Resources} folder into \foldt{.github/workflows}.
+            \item{}\cmd{add} this to git, \cmd{commit} and \cmd{push} to github.
+            \item{}Go to github and on the line by your commits, you should see either \textcolor{green}{\checkmark{}}, \textcolor{orange}{$\circ$} or \textcolor{red}{$\times{}$}
+        \end{itemize}
+    \end{alertblock}
+
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{Images/folderstruct4.png}        
+    \end{center}
 \end{frame}
 
 \begin{frame}{Anatomy of the YAML}
@@ -1285,14 +1421,14 @@ test = ["pytest"]
         \end{itemize}
     \end{itemize}
     \only<1-3>{\vspace{-5\baselineskip}}
-    \only<1>{\lstinputlisting[basicstyle=\tiny, linerange={4-7}]{test_florp.yml}}
-    \only<2>{\lstinputlisting[basicstyle=\tiny, linerange={9-16}]{test_florp.yml}}
-    \only<3>{\lstinputlisting[basicstyle=\tiny, linerange={18-39}]{test_florp.yml}}
-    \only<4>{\lstinputlisting[basicstyle=\tiny, linerange={21-25}]{test_florp.yml}}
-    \only<5>{\lstinputlisting[basicstyle=\tiny, linerange={27-39}]{test_florp.yml}}
-    \only<6>{\lstinputlisting[basicstyle=\tiny, linerange={28-32}]{test_florp.yml}}
-    \only<7>{\lstinputlisting[basicstyle=\tiny, linerange={34-36}]{test_florp.yml}}    
-    \only<8>{\lstinputlisting[basicstyle=\tiny, linerange={38-40}]{test_florp.yml}}    
+    \only<1>{\lstinputlisting[basicstyle=\tiny, linerange={4-7}]{Resources/test_florp.yml}}
+    \only<2>{\lstinputlisting[basicstyle=\tiny, linerange={9-16}]{Resources/test_florp.yml}}
+    \only<3>{\lstinputlisting[basicstyle=\tiny, linerange={18-39}]{Resources/test_florp.yml}}
+    \only<4>{\lstinputlisting[basicstyle=\tiny, linerange={21-25}]{Resources/test_florp.yml}}
+    \only<5>{\lstinputlisting[basicstyle=\tiny, linerange={27-39}]{Resources/test_florp.yml}}
+    \only<6>{\lstinputlisting[basicstyle=\tiny, linerange={28-32}]{Resources/test_florp.yml}}
+    \only<7>{\lstinputlisting[basicstyle=\tiny, linerange={34-36}]{Resources/test_florp.yml}}    
+    \only<8>{\lstinputlisting[basicstyle=\tiny, linerange={38-40}]{Resources/test_florp.yml}}    
 \end{frame}
 
 \begin{frame}{Testing}
@@ -1316,12 +1452,12 @@ test = ["pytest"]
 
     \only<1> {
         \begin{center}
-            \includegraphics[width=0.9\textwidth]{findingmarket.jpg}
+            \includegraphics[width=0.9\textwidth]{Images/findingmarket.jpg}
         \end{center}
     }
     \only<2-> {
         \begin{center}
-            \includegraphics[width=0.9\textwidth]{exampleactions.jpg}
+            \includegraphics[width=0.9\textwidth]{Images/exampleactions.jpg}
         \end{center}
     }
 \end{frame}
@@ -1336,41 +1472,27 @@ test = ["pytest"]
 
     \only<3-> {
         \begin{center}
-            \includegraphics[width=0.9\textwidth]{ghpages.jpg}
+            \includegraphics[width=0.9\textwidth]{Images/ghpages.jpg}
         \end{center}
     }
 \end{frame}
 
 \begin{frame}{Documentation in Actions(s)}
-    \begin{itemize}[<+->]
-        \item{}So let's give it a go!
-        \item{}Go to the marketplace and find an action doing (almost) what we want.\\ \tiny{Static Pages.}
-        \item{}Add a bit of script to make it do (exactly) what we want.\\
-        \tiny{Build the docs and upload those.}
-        \item{}Run it!
-        \item{}Go to \kw{https://<username>.github.io/polysolve}!
-    \end{itemize}
-
-    \only<1>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{findingmarket.jpg}
-        \end{center}
-    }
-    \only<2>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{original-action.jpg}
-        \end{center}
-    }
-    \only<3>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{modified-action.jpg}
-        \end{center}
-    }
-    \only<4>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{manual-workflow.jpg}
-        \end{center}
-    }
+    \begin{alertblock}{Docs}
+        \begin{itemize}
+            \item{}Go to the marketplace and find an action doing (almost) what we want. (Static Pages is a good start)
+            \item{}Add a bit of script to make it do (exactly) what we want.
+            \begin{itemize}
+                \item{}Setup python.
+                \item{}Install the project. (\textbf{Note:} Remember the extras!)
+                \item{}Build the docs.
+                \item{}Upload the docs. (\textbf{Note:} part of our template)
+            \end{itemize}
+            \item{}If you're struggling, take a look at \filet{test_float.yml}
+            \item{}If you're still struggling, \filet{Resources/run_docs.yml} is a complete solution. See if you can work out what it's doing.
+            \item{}When you're done, you should be able to go to \url{https://<username>.github.io/<repository>/}
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \section{Bonus}
@@ -1387,10 +1509,10 @@ test = ["pytest"]
     \end{itemize}
 
     \only<4-5>{
-        \lstinputlisting[basicstyle=\tiny]{CITATION.cff}
+        \lstinputlisting[basicstyle=\tiny]{Resources/CITATION.cff}
     }
     \only<6>{
-        \includegraphics[width=0.9\textwidth]{CITATION.jpg}
+        \includegraphics[width=0.9\textwidth]{Images/CITATION.jpg}
     }
 \end{frame}
 
@@ -1398,12 +1520,13 @@ test = ["pytest"]
     \begin{itemize}[<+->]
         \item{}Going a step further than just adding the citation file.
         \item{}Mint a DOI for a version of the software allowing it to be cited.
+        \item{}STFC provides a DOI minting service.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Extra tools}
     \begin{itemize}[<+->]
-        \item{}Remember we mentioned an IDE easlier in the talk?
+        \item{}Remember we mentioned an IDE earlier in the talk?
         \item{}An IDE is just one of many tools which can be helpful in development.
         \begin{itemize}
             \item{}IDE -- Specialised editor to make development easier 
@@ -1439,7 +1562,7 @@ docs = ["sphinx",
         "sphinx-rtd-theme", 
         "sphinx_autodoc_typehints"]
 test = ["pytest"]
-lint = ["ruff=0.8.0"]
+lint = ["ruff<0.13.0"]
             \end{lstlisting}
         \end{block}
     \end{onlyenv}
@@ -1457,17 +1580,17 @@ lint = ["ruff=0.8.0"]
     \end{onlyenv}
 
     \begin{onlyenv}<5>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={13-19,38}]{ruff-config.toml}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={13-19,38}]{Resources/ruff-config.toml}
     \end{onlyenv}
 
     \begin{onlyenv}<6>
-        \lstinputlisting[basicstyle=\scriptsize,linerange={1-4,50-52}]{ruff-config.toml}
+        \lstinputlisting[basicstyle=\scriptsize,linerange={1-4,50-52}]{Resources/ruff-config.toml}
     \end{onlyenv}
 
 \end{frame}
 
 \begin{frame}{Ruff times\footnote[]{\filet{lint.yml}}}
-    \lstinputlisting[basicstyle=\scriptsize]{lint.yml}
+    \lstinputlisting[basicstyle=\scriptsize]{Resources/lint.yml}
 \end{frame}
 
 \begin{frame}{cookiecutter}
