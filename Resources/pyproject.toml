@@ -10,9 +10,9 @@ readme = "README.md"
 description = ""
 license = {text = "BSD-3-Clause"}
 
-keywords = [...]
-dependencies = [...]
-classifiers = [...]
+keywords = []
+dependencies = []
+classifiers = []
 dynamic = ["version"]
 
 [project.urls]
