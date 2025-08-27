@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polysolve"
+authors = [{name = "Me", email = "me@me.com"}]
+requires-python = ">= 3.8"
+readme = "README.md"
+description = "A module for solving quadratic/cubic equations."
+license = {text = "BSD-3-Clause"}
+
+keywords = ["quadratic", "cubic", "polynomial"]
+dependencies = ["cowsay"]
+classifiers = []
+dynamic = ["version"]
+
+[project.urls]
+Homepage="https://github.com/XXX/polysolve"
+Repository="https://github.com/XXX/polysolve.git"
+
+[tool.setuptools.dynamic]
+version = {attr = "polysolve.__version__"}

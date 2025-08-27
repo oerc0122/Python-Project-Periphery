@@ -1,0 +1,4 @@
+- `cd` into folder
+- Set up git user/email on IDAaaS
+- Fix `sphinx_rtd_theme`
+- Add notes on adding ssh-keys and `git config`
