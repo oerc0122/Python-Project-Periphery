@@ -76,6 +76,7 @@
 
 \usepackage{ulem}
 \usepackage{tikz}
+\usepackage{amssymb}
 \usetikzlibrary{mindmap}
 \usepackage{listings}
 \lstset{
@@ -255,7 +256,7 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
         \begin{itemize}
             \item{}Rename \filet{florp.py} to \filet{solver.py}
             \item{}Rename \kw{florp} to \kw{quadratic}
-            \item{}Rename \kw{florp2} to \kw{quartic}
+            \item{}Rename \kw{florp2} to \kw{cubic}
         \end{itemize}
     \end{alertblock}
 \end{frame}
@@ -872,7 +873,7 @@ array([1, 2, 3])
 
 \subsection{Sphinx}
 
-\begin{frame}[fragile]{Finally getting to docs}
+\begin{frame}{Finally getting to docs}
     \begin{itemize}[<+->]
         \item{}Now after so long, it's time to finally write some docs!
         \item{}{\small (or let the computer write some for us...)}
@@ -1010,6 +1011,7 @@ array([1, 2, 3])
 
     \begin{alertblock}{It's magic!}
         \begin{itemize}
+            \item{}Add \kw{sphinx.ext.autodoc}, \kw{sphinx.ext.napoleon}, and \kw{sphinx.ext.autosummary} to the \kw{extensions} in \filet{conf.py}
             \item{}From the \foldt{PolysolveLib} folder run \cmd{sphinx-apidoc -o docs/source/api polysolve}
             \item{}Add \kw{api/modules} to the \kw{toctree} in \filet{docs/source/index.rst}.
             \item{}Run \cmd{make html}
@@ -1058,7 +1060,6 @@ array([1, 2, 3])
         \begin{lstlisting}[basicstyle=\tiny]
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
-    'numpy': ('https://docs.scipy.org/doc/numpy/', None),
 }
         \end{lstlisting}
     \end{alertblock}    
@@ -1075,7 +1076,7 @@ intersphinx_mapping = {
 [project.optional-dependencies]
 docs = ["sphinx",
         "sphinx_rtd_theme", 
-        "sphinx_autodoc_typehints"]
+        "sphinx-autodoc-typehints"]
             \end{lstlisting}
         \end{alertblock}
     \end{onlyenv}
@@ -1163,7 +1164,7 @@ def test_roots():
 \begin{frame}{Testing}
     \begin{itemize}[<+->]
         \item{}By default, \cmd{pytest} scans files from where you are.
-        \item{}\cmd{pytest} picks up files starting with \filet{test_}
+        \item{}\cmd{pytest} picks up files starting with \filet{test_}.
         \item{}Runs all functions starting with \kw{test_}.
         \item{}{\scriptsize (and as mentioned with the \cmd{--doctest-modules} flag, runs those too)}
         \item{}Collates them all and runs them together.
@@ -1193,13 +1194,17 @@ def test_roots():
 
     \begin{onlyenv}<4>
         \begin{lstlisting}[basicstyle=\scriptsize]
-@pytest.mark.parametrize('params, expected',
-                         [([1., 0., 0.], [0., 0.]),
-                          ([1., 14., 49.], [7., 7.]),
-                          ([3., 2., 1.], [1/3, -1.])])
+@pytest.mark.parametrize(
+    "params, expected",
+    [
+        ([1.0, 0.0, 0.0], [0.0, 0.0]),
+        ([1.0, 14.0, 49.0], [-7.0, -7.0]),
+        ([3.0, 2.0, -1.0], [1 / 3, -1.0]),
+    ],
+)
 def test_quadratic(params, expected):
     """Test quadratic meets expectations."""
-    assert np.isclose(quadratic(*params), expected)
+    assert all(map(cmath.isclose, quadratic(*params), expected))
         \end{lstlisting}
     \end{onlyenv}
 
@@ -1229,13 +1234,17 @@ def test_example(a, b):
     \end{alertblock}
 
         \begin{lstlisting}[basicstyle=\scriptsize]
-@pytest.mark.parametrize('params, expected',
-                         [([1., 0., 0.], [0., 0.]),
-                          ([1., 14., 49.], [7., 7.]),
-                          ([3., 2., 1.], [1/3, -1.])])
+@pytest.mark.parametrize(
+    "params, expected",
+    [
+        ([1.0, 0.0, 0.0], [0.0, 0.0]),
+        ([1.0, 14.0, 49.0], [-7.0, -7.0]),
+        ([3.0, 2.0, -1.0], [1 / 3, -1.0]),
+    ],
+)
 def test_quadratic(params, expected):
     """Test quadratic meets expectations."""
-    assert math.isclose(quadratic(*params), expected)
+    assert all(map(cmath.isclose, quadratic(*params), expected))
         \end{lstlisting}
 
 \end{frame}
@@ -1253,7 +1262,7 @@ def test_quadratic(params, expected):
 def test_quadratic_fails():
     """Check bad quadratic raises error."""
     with pytest.raises(ValueError, 
-                       match="negative discriminant"):
+                       match="not quadratic"):
         # There are infinite roots on this flat line.
         quadratic(0., 0., 0.)
         \end{lstlisting}
@@ -1269,7 +1278,7 @@ def test_quadratic_fails():
     def test_quadratic_fails():
         """Check bad quadratic raises error."""
         with pytest.raises(ValueError, 
-                           match="negative discriminant"):
+                           match="not quadratic"):
             # There are infinite roots on this flat line.
             quadratic(0., 0., 0.)
             \end{lstlisting}
@@ -1332,14 +1341,16 @@ def test_quintic():
         \begin{itemize}
             \item{}Add it to your \filet{pyproject.toml}
             \item{}Install it to check it works.
-            \item{}\cmd{add} all appropriate files and get it on git.
+            \item{}\cmd{add} all appropriate files and get it on GitHub (\cmd{push}).
         \end{itemize}
     
         \begin{lstlisting}[basicstyle=\scriptsize]
 [project.optional-dependencies]
-docs = ["sphinx",
+docs = [
+    "sphinx",
     "sphinx-rtd-theme", 
-    "sphinx_autodoc_typehints"]
+    "sphinx-autodoc-typehints"
+]
 test = ["pytest"]
         \end{lstlisting}
     \end{alertblock}
@@ -1374,14 +1385,21 @@ test = ["pytest"]
         \item{}We do this by adding a \filet{yaml} file in the right place.
         \item{}GitHub provides actions where we just need to fill in values.
     \end{itemize}
+\end{frame}
 
-    \only<4>{
-        \begin{block}{Adding it in!}
-            \cmd{mkdir -P .github/workflows}
-    
-            \cmd{cp <pres>/test_florp.yml .github/workflows}
-        \end{block}
-    }
+\begin{frame}{Starting off}
+    \begin{alertblock}{Your turn}
+        \begin{itemize}
+            \item{}Create a nested folder in \foldt{PolysolveLib} called \foldt{.github/workflows}
+            \item{}Copy the \filet{test_florp.yml} from the \foldt{Resources} folder into \foldt{.github/workflows}.
+            \item{}\cmd{add} this to git, \cmd{commit} and \cmd{push} to github.
+            \item{}Go to github and on the line by your commits, you should see either \textcolor{green}{\checkmark{}}, \textcolor{orange}{$\circ$} or \textcolor{red}{$\times{}$}
+        \end{itemize}
+    \end{alertblock}
+
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{Images/folderstruct4.png}        
+    \end{center}
 \end{frame}
 
 \begin{frame}{Anatomy of the YAML}
@@ -1460,35 +1478,21 @@ test = ["pytest"]
 \end{frame}
 
 \begin{frame}{Documentation in Actions(s)}
-    \begin{itemize}[<+->]
-        \item{}So let's give it a go!
-        \item{}Go to the marketplace and find an action doing (almost) what we want.\\ \tiny{Static Pages.}
-        \item{}Add a bit of script to make it do (exactly) what we want.\\
-        \tiny{Build the docs and upload those.}
-        \item{}Run it!
-        \item{}Go to \kw{https://<username>.github.io/polysolve}!
-    \end{itemize}
-
-    \only<1>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{Images/findingmarket.jpg}
-        \end{center}
-    }
-    \only<2>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{Images/original-action.jpg}
-        \end{center}
-    }
-    \only<3>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{Images/modified-action.jpg}
-        \end{center}
-    }
-    \only<4>{
-        \begin{center}
-            \includegraphics[width=0.9\textwidth]{Images/manual-workflow.jpg}
-        \end{center}
-    }
+    \begin{alertblock}{Docs}
+        \begin{itemize}
+            \item{}Go to the marketplace and find an action doing (almost) what we want. (Static Pages is a good start)
+            \item{}Add a bit of script to make it do (exactly) what we want.
+            \begin{itemize}
+                \item{}Setup python.
+                \item{}Install the project. (\textbf{Note:} Remember the extras!)
+                \item{}Build the docs.
+                \item{}Upload the docs. (\textbf{Note:} part of our template)
+            \end{itemize}
+            \item{}If you're struggling, take a look at \filet{test_float.yml}
+            \item{}If you're still struggling, \filet{Resources/run_docs.yml} is a complete solution. See if you can work out what it's doing.
+            \item{}When you're done, you should be able to go to \url{https://<username>.github.io/<repository>/}
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \section{Bonus}
@@ -1516,12 +1520,13 @@ test = ["pytest"]
     \begin{itemize}[<+->]
         \item{}Going a step further than just adding the citation file.
         \item{}Mint a DOI for a version of the software allowing it to be cited.
+        \item{}STFC provides a DOI minting service.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Extra tools}
     \begin{itemize}[<+->]
-        \item{}Remember we mentioned an IDE easlier in the talk?
+        \item{}Remember we mentioned an IDE earlier in the talk?
         \item{}An IDE is just one of many tools which can be helpful in development.
         \begin{itemize}
             \item{}IDE -- Specialised editor to make development easier 
@@ -1557,7 +1562,7 @@ docs = ["sphinx",
         "sphinx-rtd-theme", 
         "sphinx_autodoc_typehints"]
 test = ["pytest"]
-lint = ["ruff=0.8.0"]
+lint = ["ruff<0.13.0"]
             \end{lstlisting}
         \end{block}
     \end{onlyenv}
