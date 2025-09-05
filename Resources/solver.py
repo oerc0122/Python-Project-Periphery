@@ -5,7 +5,7 @@ from cowsay import cow
 
 CBRT_UNITY_IM = sqrt(3)/2 * 1j
 
-def florp(a, b, c):
+def quadratic(a, b, c):
     det = b**2 - (4*a*c)
 
     if math.isclose(det, 0):
@@ -13,7 +13,7 @@ def florp(a, b, c):
 
     return ((-b + sqrt(det)) / (2*a), (-b - sqrt(det)) / (2*a))
 
-def florp2(a, b, c, d):
+def cubic(a, b, c, d):
     q = (3*a*c - b**2) / (9*a**2)
     r = (9*a*b*c - 27*a**2*d - 2*b**3) / (54*a**3)
 
