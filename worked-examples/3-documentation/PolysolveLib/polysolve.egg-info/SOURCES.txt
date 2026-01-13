@@ -1,0 +1,8 @@
+pyproject.toml
+polysolve/__init__.py
+polysolve/solver.py
+polysolve.egg-info/PKG-INFO
+polysolve.egg-info/SOURCES.txt
+polysolve.egg-info/dependency_links.txt
+polysolve.egg-info/requires.txt
+polysolve.egg-info/top_level.txt

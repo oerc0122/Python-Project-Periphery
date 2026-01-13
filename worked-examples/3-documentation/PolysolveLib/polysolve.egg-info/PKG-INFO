@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: polysolve
+Version: 0.1
+Summary: A module for solving quadratic/cubic equations.
+Author-email: Me <me@me.com>
+License: BSD-3-Clause
+Project-URL: Homepage, https://github.com/XXX/polysolve
+Project-URL: Repository, https://github.com/XXX/polysolve.git
+Keywords: quadratic,cubic,polynomial
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: cowsay

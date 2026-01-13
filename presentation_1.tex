@@ -218,6 +218,20 @@ Scientific Computing Department, STFC \\ \ \\% Your institution for the title pa
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Before we start}
+    \begin{itemize}
+        \item{}You may need to create a virtual environment to be able to install things.
+    \end{itemize}  
+
+    \begin{alertblock}{Set up Virtual environment}
+        \begin{itemize}
+            \item{}Run \cmd{python -m venv <project>} (where project is the name you want to use).
+            \item{}From \filet{Scripts} in \filet{<project>}, run \cmd{activate.bat}.
+        \end{itemize}
+    \end{alertblock}
+
+\end{frame}
+
 \section{The code}
 
 \begin{frame}{Introducing florp}
@@ -1020,7 +1034,29 @@ array([1, 2, 3])
     \end{alertblock}
 \end{frame}
 
-\begin{frame}[fragile]{Type-hints}
+\begin{frame}[fragile]{Docstring magic}
+    \begin{itemize}
+        \item{}But what if we add files? 
+        \item{}Wouldn't it be tedious to run this every time?
+        \item{}Time to use another extension!
+    \end{itemize}
+
+     \begin{alertblock}{Try it now}
+        \begin{itemize}
+            \item{}Add a new extensions \kw{sphinx.ext.apidoc}.
+            \item{}Add a new configuration variable which looks like the following.
+            \item{}\textbf{Note:} Directories are relative to the \filet{conf.py}
+        \end{itemize}
+        \begin{lstlisting}
+apidoc_modules = [
+    {"path": "../../polysolve", 
+     "destination": "api"},
+]
+        \end{lstlisting}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Type-hints}
     \begin{itemize}[<+->]
         \item{}But our typehints aren't with our params...
         \item{}If only there were some tool to extract those too.
