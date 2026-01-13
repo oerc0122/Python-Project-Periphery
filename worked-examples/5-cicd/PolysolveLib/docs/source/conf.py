@@ -20,7 +20,12 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.apidoc",
     "sphinx_autodoc_typehints",
+]
+
+apidoc_modules = [
+    {"path": "../../polysolve", "destination": "api"},
 ]
 
 intersphinx_mapping = {
